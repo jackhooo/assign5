@@ -155,7 +155,6 @@ void draw()
       if (shootx[i]<=-30)
       {
         shootx[i]=-1000;
-        scount-=1;
       }
     }
     
@@ -184,7 +183,7 @@ void draw()
       }
       for (int i = 0; i < 5; i++ )
       {
-        if (isHit(shootx[i], shooty[i], s.width, s.height, exarray[x], eyarray[x], e.width, e.height) == true && disappear[x]==0 && shootx[i]!=-1 )
+        if (isHit(shootx[i], shooty[i], s.width, s.height, exarray[x], eyarray[x], e.width, e.height) == true && disappear[x]==0 && shootx[i]!=-1000 )
         {
           scoreChange(20);
           disappear[x] = 1;
@@ -350,12 +349,16 @@ void keyPressed() {
       break;
     }
   }
-  if (key==' '&&scount<4)
+  if (key==' ')
   {
-    scount++;
+    scount=0;
+    for(int a=0;a<5;a++)
+    {if(shootx[a]!=-1000){scount++;}}
+    if(scount<5)
+    {
     shootx[snum%5] = fx;
     shooty[snum%5] = fy+10;
-    snum++;
+    snum++;}
   }
 }
 
